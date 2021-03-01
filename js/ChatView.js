@@ -1,61 +1,6 @@
 const users = [{name: "Sonia", pic: "http://sprites-inc.co.uk/files/Starforce/MainCharacters/Sonia.png"}, {name: "Luna", pic: "http://sprites-inc.co.uk/files/Starforce/MainCharacters/Luna.png"}]
 var selectedUser = 0
 
-class MessagesStore {
-
-    constructor(key) {
-        this.key = key
-    }
-
-    getMessages() {
-        let messages = localStorage.getItem(this.key)
-        return messages ? JSON.parse(messages) : []
-    }
-
-    saveMessages(messages) {
-        localStorage.setItem(this.key, JSON.stringify(messages))
-    }
-
-    clearMessages() {
-        localStorage.removeItem(this.key)
-    }
-
-}
-
-class Chat {
-
-    constructor() {
-        this.store = new MessagesStore()
-        this.messages = this.store.getMessages()
-        this.messagesObservers = []
-    }
-
-    sendMessage(user, message) {
-        this.messages.push({
-            user: user,
-            text: message
-        })
-        this.store.saveMessages(this.messages)
-        this.notify()
-    }
-
-    clear() {
-        this.messages = []
-        this.store.clearMessages()
-        this.notify()
-    }
-
-    observeMessages(callback) {
-        this.messagesObservers.push(callback)
-        this.notify()
-    }
-
-    notify() {
-        this.messagesObservers.forEach(observer => observer(this.messages))
-    }
-
-}
-
 class ChatView {
 
     constructor(chat) {
@@ -149,9 +94,3 @@ class ChatView {
     }
 
 }
-
-const messagesStore = new MessagesStore("messages")
-const chat = new Chat()
-const chatView = new ChatView(chat)
-
-chatView.renderUsers()
