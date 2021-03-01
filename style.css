@@ -1,0 +1,42 @@
+body {
+    background-color: #201f1f;
+    color: #ffffff;
+  }
+  
+  .messageContainer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #bfbfbf;
+  }
+  
+  ul {
+    margin-bottom: 80px;
+  }
+  
+  li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px;
+  }
+  
+  li div {
+      background-color: #3a3b55;
+      color: #ffffff;
+      padding: 15px;
+      border-radius: 5px;
+  }
+  
+  img {
+      border-radius: 50%;
+      border: 1px solid gray;
+      width: 80px;
+      height: 80px;
+      margin-right: 10px;
+  }
