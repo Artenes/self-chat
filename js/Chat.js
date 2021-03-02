@@ -24,6 +24,10 @@ class Chat {
         return this.currentUserIndex
     }
 
+    getUser() {
+        return this.users[this.currentUserIndex]
+    }
+
     sendMessage(message) {
         let user = this.users[this.currentUserIndex]
         this.messages.push({

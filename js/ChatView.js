@@ -7,6 +7,7 @@ class ChatView {
         this.ulMessages = document.getElementById("ulMessages")
         this.sltUsers = document.getElementById("sltUsers")
         this.btnClear = document.getElementById("btnClear")
+        this.imgUserSelection = document.getElementById("imgUserSelection")
 
         this.iptMessage.addEventListener("keydown", event => this.onKeydown(event))
         this.btnSend.addEventListener("click", () => this.onSend())
@@ -27,11 +28,13 @@ class ChatView {
     
         if (event.key === "ArrowUp") {
             this.sltUsers.value = this.chat.prevUser()
+            this.imgUserSelection.src = this.chat.getUser().pic
             return
         }
     
         if (event.key === "ArrowDown") {
             this.sltUsers.value = this.chat.nextUser()
+            this.imgUserSelection.src = this.chat.getUser().pic
             return
         }
     }
@@ -63,6 +66,7 @@ class ChatView {
             optionNode.appendChild(textUser)
             this.sltUsers.appendChild(optionNode)
         })
+        this.imgUserSelection.src = this.chat.getUser().pic
     }
 
     renderMessages(messages) {
