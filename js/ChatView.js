@@ -1,6 +1,3 @@
-const users = [{name: "Sonia", pic: "http://sprites-inc.co.uk/files/Starforce/MainCharacters/Sonia.png"}, {name: "Luna", pic: "http://sprites-inc.co.uk/files/Starforce/MainCharacters/Luna.png"}]
-var selectedUser = 0
-
 class ChatView {
 
     constructor(chat) {
@@ -15,8 +12,10 @@ class ChatView {
         this.btnSend.addEventListener("click", () => this.onSend())
         this.btnClear.addEventListener("click", () => this.onClear())
 
+        //this will trigger messages rendering
         this.chat.observeMessages(messages => this.onMessagesChange(messages))
-
+        
+        this.renderUsers(this.chat.getUsers())
         this.iptMessage.focus()
     }
 
@@ -27,19 +26,13 @@ class ChatView {
         }
     
         if (event.key === "ArrowUp") {
-            selectedUser--
-            if (selectedUser < 0) {
-                selectedUser = users.length - 1
-            }
-            sltUsers.value = selectedUser
+            this.sltUsers.value = this.chat.prevUser()
+            return
         }
     
         if (event.key === "ArrowDown") {
-            selectedUser++
-            if (selectedUser >= users.length) {
-                selectedUser = 0
-            }
-            sltUsers.value = selectedUser
+            this.sltUsers.value = this.chat.nextUser()
+            return
         }
     }
 
@@ -49,12 +42,11 @@ class ChatView {
 
     onSend() {
         const message = this.iptMessage.value
-        const user = users[this.sltUsers.value]
     
         if (!message)
             return
     
-        this.chat.sendMessage(user, message)
+        this.chat.sendMessage(message)
     }
 
     onMessagesChange(messages) {
@@ -62,7 +54,7 @@ class ChatView {
         this.clearMessageBox()
     }
 
-    renderUsers() {
+    renderUsers(users) {
         this.sltUsers.innerHTML = ''
         users.forEach((user, index) => {
             const optionNode = document.createElement("option")

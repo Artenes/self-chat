@@ -1,12 +1,31 @@
 class Chat {
 
-    constructor() {
-        this.store = new MessagesStore()
+    constructor(messagesStore, users) {
+        this.users = users
+        this.store = messagesStore
         this.messages = this.store.getMessages()
         this.messagesObservers = []
+        this.currentUserIndex = 0
     }
 
-    sendMessage(user, message) {
+    nextUser() {
+        this.currentUserIndex++
+        if (this.currentUserIndex == this.users.length)
+            this.currentUserIndex = 0
+
+        return this.currentUserIndex
+    }
+
+    prevUser() {
+        this.currentUserIndex--
+        if (this.currentUserIndex < 0)
+            this.currentUserIndex = this.users.length - 1
+
+        return this.currentUserIndex
+    }
+
+    sendMessage(message) {
+        let user = this.users[this.currentUserIndex]
         this.messages.push({
             user: user,
             text: message
@@ -26,8 +45,12 @@ class Chat {
         this.notify()
     }
 
+    getUsers() {
+        return this.users
+    }
+
     notify() {
         this.messagesObservers.forEach(observer => observer(this.messages))
     }
 
-}s
+}
