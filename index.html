@@ -1,31 +1,33 @@
 <html>
 
-    <head>
-        <link rel="stylesheet" href="style.css">
-    </head>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    <body>
-        
-        <h1>Chat</h1>
+<body>
 
-        <ul id="ulMessages"></ul>
-      
-        <div class="messageContainer">
-          <img class="user-selection" id="imgUserSelection">
-          <select name="user" id="sltUsers"></select>
-          <input id="iptMessage" type="text">
-          <button id="btnSend">Send</button>
-          <button id="btnClear">Clear</button>  
+    <h1>Chat</h1>
+
+    <ul id="ulMessages"></ul>
+
+    <div class="messageContainer">
+        <div id="userSelect">
+            <img id="imgUserSelection">
+            <select name="user" id="sltUsers"></select>
         </div>
-        
-        <script src="js/users.js"></script>
-        <script src="js/MessagesStore.js"></script>
-        <script src="js/Chat.js"></script>
-        <script src="js/ChatView.js"></script>
-        <script src="js/main.js"></script>
+        <input id="iptMessage" type="text">
+        <button id="btnSend">Send</button>
+        <button id="btnClear">Clear</button>
+    </div>
 
-    </body>
+    <script src="js/users.js"></script>
+    <script src="js/MessagesStore.js"></script>
+    <script src="js/Chat.js"></script>
+    <script src="js/ChatView.js"></script>
+    <script src="js/main.js"></script>
 
-    
+</body>
+
+
 
 </html>

@@ -1,7 +1,6 @@
 * {
   padding: 0;
   margin: 0;
-  border: 0;
 }
 
 body {
@@ -24,11 +23,6 @@ body {
     padding: 5px;
   }
 
-  .user-selection {
-    width: 50px;
-    height: 50px;
-  }
-
   .messageContainer {
     display: flex;
     align-items: center;
@@ -43,6 +37,29 @@ body {
     background-color: #bfbfbf;
   }
   
+  #userSelect {
+    background-color: white;
+    display: flex;
+
+    border-color: #3399cc;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  #userSelect select {
+    border: none;
+    font-family: monospace;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+  }
+
+  #userSelect img {
+    width: 40px;
+    height: 40px;
+  }
+
+
   .messageContainer * {
     margin-right: 5px;
   }
