@@ -12,11 +12,12 @@ class ChatView {
         this.iptMessage.addEventListener("keydown", event => this.onKeydown(event))
         this.btnSend.addEventListener("click", () => this.onSend())
         this.btnClear.addEventListener("click", () => this.onClear())
+        this.sltUsers.addEventListener("change", event => this.onUserManualChange(event))
 
-        //this will trigger messages rendering
+        //this will trigger messages and user rendering
         this.chat.observeMessages(messages => this.onMessagesChange(messages))
+        this.chat.observeUser((users, userIndex) => this.onUserChange(users, userIndex))
         
-        this.renderUsers(this.chat.getUsers())
         this.iptMessage.focus()
     }
 
@@ -27,14 +28,12 @@ class ChatView {
         }
     
         if (event.key === "ArrowUp") {
-            this.sltUsers.value = this.chat.prevUser()
-            this.imgUserSelection.src = this.chat.getUser().pic
+            this.chat.prevUser()
             return
         }
     
         if (event.key === "ArrowDown") {
-            this.sltUsers.value = this.chat.nextUser()
-            this.imgUserSelection.src = this.chat.getUser().pic
+            this.chat.nextUser()
             return
         }
     }
@@ -57,6 +56,16 @@ class ChatView {
         this.clearMessageBox()
     }
 
+    onUserChange(users, userIndex) {
+        this.renderUsers(users)
+        let user = users[userIndex]
+        this.selectUser(userIndex, user)
+    }
+
+    onUserManualChange(event) {
+        this.chat.selectUser(event.target.value)
+    }
+
     renderUsers(users) {
         this.sltUsers.innerHTML = ''
         users.forEach((user, index) => {
@@ -66,7 +75,6 @@ class ChatView {
             optionNode.appendChild(textUser)
             this.sltUsers.appendChild(optionNode)
         })
-        this.imgUserSelection.src = this.chat.getUser().pic
     }
 
     renderMessages(messages) {
@@ -87,6 +95,11 @@ class ChatView {
 
     clearMessageBox() {
         this.iptMessage.value = ""
+    }
+
+    selectUser(userIndex, user) {
+        this.imgUserSelection.src = user.pic
+        this.sltUsers.value = userIndex
     }
 
 }

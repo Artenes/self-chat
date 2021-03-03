@@ -5,27 +5,25 @@ class Chat {
         this.store = messagesStore
         this.messages = this.store.getMessages()
         this.messagesObservers = []
+        this.userObservers = []
         this.currentUserIndex = 0
     }
 
     nextUser() {
-        this.currentUserIndex++
-        if (this.currentUserIndex == this.users.length)
-            this.currentUserIndex = 0
-
-        return this.currentUserIndex
+        this.selectUser(this.currentUserIndex + 1)
     }
 
     prevUser() {
-        this.currentUserIndex--
-        if (this.currentUserIndex < 0)
-            this.currentUserIndex = this.users.length - 1
-
-        return this.currentUserIndex
+        this.selectUser(this.currentUserIndex - 1)
     }
 
-    getUser() {
-        return this.users[this.currentUserIndex]
+    selectUser(index) {
+        this.currentUserIndex = index;
+        if (this.currentUserIndex < 0)
+            this.currentUserIndex = this.users.length - 1
+        else if (this.currentUserIndex >= this.users.length)
+            this.currentUserIndex = 0
+        this.notifyUserChange()
     }
 
     sendMessage(message) {
@@ -35,26 +33,31 @@ class Chat {
             text: message
         })
         this.store.saveMessages(this.messages)
-        this.notify()
+        this.notifyMessageChange()
     }
 
     clear() {
         this.messages = []
         this.store.clearMessages()
-        this.notify()
+        this.notifyMessageChange()
     }
 
     observeMessages(callback) {
         this.messagesObservers.push(callback)
-        this.notify()
+        this.notifyMessageChange()
     }
 
-    getUsers() {
-        return this.users
+    observeUser(callback) {
+        this.userObservers.push(callback)
+        this.notifyUserChange()
     }
 
-    notify() {
+    notifyMessageChange() {
         this.messagesObservers.forEach(observer => observer(this.messages))
+    }
+
+    notifyUserChange() {
+        this.userObservers.forEach(observer => observer(this.users, this.currentUserIndex))
     }
 
 }
