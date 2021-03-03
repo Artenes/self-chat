@@ -1,8 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
 body {
     background-color: #201f1f;
-    color: #ffffff;
+    color: black;
+    font-family: monospace;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    padding: 20px;
   }
   
+  h1 {
+    background-color: white;
+    border-color: #3399cc;
+    border-radius: 5px;
+    border-width: 6px;
+    border-style: solid;
+    
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+
   .user-selection {
     width: 50px;
     height: 50px;
@@ -34,15 +55,15 @@ body {
       display: flex;
       flex-direction: row;
       align-items: center;
-      margin-bottom: 20px;
-      padding: 10px;
-  }
-  
-  li div {
-      background-color: #3a3b55;
-      color: #ffffff;
-      padding: 15px;
+      
+      background-color: white;
+      border-color: #3399cc;
       border-radius: 5px;
+      border-width: 6px;
+      border-style: solid;
+      
+      margin-bottom: 20px;
+      padding: 5px;      
   }
   
   li img {
