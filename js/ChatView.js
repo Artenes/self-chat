@@ -39,7 +39,9 @@ class ChatView {
     }
 
     onClear() {
-        this.chat.clear()
+        let canDelete = confirm("Delete whole messages history?")
+        if (canDelete)
+            this.chat.clear()
     }
 
     onSend() {
